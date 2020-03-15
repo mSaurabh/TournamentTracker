@@ -34,10 +34,10 @@
             this.placeNumberLabel = new System.Windows.Forms.Label();
             this.placeNameValue = new System.Windows.Forms.TextBox();
             this.placeNameLabel = new System.Windows.Forms.Label();
-            this.priceAmountValue = new System.Windows.Forms.TextBox();
-            this.priceAmountLabel = new System.Windows.Forms.Label();
-            this.pricePercentageValue = new System.Windows.Forms.TextBox();
-            this.pricePercentageLabel = new System.Windows.Forms.Label();
+            this.prizeAmountValue = new System.Windows.Forms.TextBox();
+            this.prizeAmountLabel = new System.Windows.Forms.Label();
+            this.prizePercentageValue = new System.Windows.Forms.TextBox();
+            this.prizePercentageLabel = new System.Windows.Forms.Label();
             this.orPlaceAmountPercentageLabel = new System.Windows.Forms.Label();
             this.createPrizeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -89,41 +89,43 @@
             this.placeNameLabel.TabIndex = 14;
             this.placeNameLabel.Text = "Place Name";
             // 
-            // priceAmountValue
+            // prizeAmountValue
             // 
-            this.priceAmountValue.Location = new System.Drawing.Point(233, 165);
-            this.priceAmountValue.Name = "priceAmountValue";
-            this.priceAmountValue.Size = new System.Drawing.Size(212, 31);
-            this.priceAmountValue.TabIndex = 17;
+            this.prizeAmountValue.Location = new System.Drawing.Point(233, 165);
+            this.prizeAmountValue.Name = "prizeAmountValue";
+            this.prizeAmountValue.Size = new System.Drawing.Size(212, 31);
+            this.prizeAmountValue.TabIndex = 17;
+            this.prizeAmountValue.Text = "0";
             // 
-            // priceAmountLabel
+            // prizeAmountLabel
             // 
-            this.priceAmountLabel.AutoSize = true;
-            this.priceAmountLabel.Font = new System.Drawing.Font("Franklin Gothic Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.priceAmountLabel.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.priceAmountLabel.Location = new System.Drawing.Point(14, 165);
-            this.priceAmountLabel.Name = "priceAmountLabel";
-            this.priceAmountLabel.Size = new System.Drawing.Size(172, 34);
-            this.priceAmountLabel.TabIndex = 16;
-            this.priceAmountLabel.Text = "Place Amount";
+            this.prizeAmountLabel.AutoSize = true;
+            this.prizeAmountLabel.Font = new System.Drawing.Font("Franklin Gothic Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prizeAmountLabel.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.prizeAmountLabel.Location = new System.Drawing.Point(14, 165);
+            this.prizeAmountLabel.Name = "prizeAmountLabel";
+            this.prizeAmountLabel.Size = new System.Drawing.Size(165, 34);
+            this.prizeAmountLabel.TabIndex = 16;
+            this.prizeAmountLabel.Text = "Prize Amount";
             // 
-            // pricePercentageValue
+            // prizePercentageValue
             // 
-            this.pricePercentageValue.Location = new System.Drawing.Point(233, 263);
-            this.pricePercentageValue.Name = "pricePercentageValue";
-            this.pricePercentageValue.Size = new System.Drawing.Size(212, 31);
-            this.pricePercentageValue.TabIndex = 19;
+            this.prizePercentageValue.Location = new System.Drawing.Point(233, 263);
+            this.prizePercentageValue.Name = "prizePercentageValue";
+            this.prizePercentageValue.Size = new System.Drawing.Size(212, 31);
+            this.prizePercentageValue.TabIndex = 19;
+            this.prizePercentageValue.Text = "0";
             // 
-            // pricePercentageLabel
+            // prizePercentageLabel
             // 
-            this.pricePercentageLabel.AutoSize = true;
-            this.pricePercentageLabel.Font = new System.Drawing.Font("Franklin Gothic Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pricePercentageLabel.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.pricePercentageLabel.Location = new System.Drawing.Point(14, 263);
-            this.pricePercentageLabel.Name = "pricePercentageLabel";
-            this.pricePercentageLabel.Size = new System.Drawing.Size(213, 34);
-            this.pricePercentageLabel.TabIndex = 18;
-            this.pricePercentageLabel.Text = "Place Percentage";
+            this.prizePercentageLabel.AutoSize = true;
+            this.prizePercentageLabel.Font = new System.Drawing.Font("Franklin Gothic Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prizePercentageLabel.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.prizePercentageLabel.Location = new System.Drawing.Point(14, 263);
+            this.prizePercentageLabel.Name = "prizePercentageLabel";
+            this.prizePercentageLabel.Size = new System.Drawing.Size(206, 34);
+            this.prizePercentageLabel.TabIndex = 18;
+            this.prizePercentageLabel.Text = "Prize Percentage";
             // 
             // orPlaceAmountPercentageLabel
             // 
@@ -151,6 +153,7 @@
             this.createPrizeButton.TabIndex = 23;
             this.createPrizeButton.Text = "Create Prize";
             this.createPrizeButton.UseVisualStyleBackColor = true;
+            this.createPrizeButton.Click += new System.EventHandler(this.createPrizeButton_Click);
             // 
             // CreatePrizeForm
             // 
@@ -160,10 +163,10 @@
             this.ClientSize = new System.Drawing.Size(462, 466);
             this.Controls.Add(this.createPrizeButton);
             this.Controls.Add(this.orPlaceAmountPercentageLabel);
-            this.Controls.Add(this.pricePercentageValue);
-            this.Controls.Add(this.pricePercentageLabel);
-            this.Controls.Add(this.priceAmountValue);
-            this.Controls.Add(this.priceAmountLabel);
+            this.Controls.Add(this.prizePercentageValue);
+            this.Controls.Add(this.prizePercentageLabel);
+            this.Controls.Add(this.prizeAmountValue);
+            this.Controls.Add(this.prizeAmountLabel);
             this.Controls.Add(this.placeNameValue);
             this.Controls.Add(this.placeNameLabel);
             this.Controls.Add(this.placeNumberValue);
@@ -172,7 +175,7 @@
             this.Font = new System.Drawing.Font("Franklin Gothic Book", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "CreatePrizeForm";
             this.Text = "Create Prize";
             this.ResumeLayout(false);
@@ -187,10 +190,10 @@
         private System.Windows.Forms.Label placeNumberLabel;
         private System.Windows.Forms.TextBox placeNameValue;
         private System.Windows.Forms.Label placeNameLabel;
-        private System.Windows.Forms.TextBox priceAmountValue;
-        private System.Windows.Forms.Label priceAmountLabel;
-        private System.Windows.Forms.TextBox pricePercentageValue;
-        private System.Windows.Forms.Label pricePercentageLabel;
+        private System.Windows.Forms.TextBox prizeAmountValue;
+        private System.Windows.Forms.Label prizeAmountLabel;
+        private System.Windows.Forms.TextBox prizePercentageValue;
+        private System.Windows.Forms.Label prizePercentageLabel;
         private System.Windows.Forms.Label orPlaceAmountPercentageLabel;
         private System.Windows.Forms.Button createPrizeButton;
     }
