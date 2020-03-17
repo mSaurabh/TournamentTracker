@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrackerLibrary.DataAccess;
 
 namespace TrackerLibrary
 {
@@ -13,7 +15,7 @@ namespace TrackerLibrary
         /// Only the methods in this class can configure the connections 
         /// But all others can retreive the inforamtions for the connections.
         /// </summary>
-        public static List<IDataConnection> Connections { get; private set; } = new List<IDataConnection>();
+        public static IDataConnection Connection { get; private set; }
         
         // Read the above line as Connections will hold anything that implements the IDataConnection contract.
 
@@ -24,21 +26,25 @@ namespace TrackerLibrary
         /// </summary>
         /// <param name="database">True/False</param>
         /// <param name="textFiles">True/False</param>
-        public static void InitializeConnections(bool database,bool textFiles)
+        public static void InitializeConnections(DatabaseType db)
         {
-            if (database)
+            if (db == DatabaseType.Sql)
             {
                 // TODO - Set up the SQL Connector properly
                 SQLConnector sql = new SQLConnector();
-                Connections.Add(sql);
+                Connection = sql;
             }
-
-            if(textFiles)
+            else if(db == DatabaseType.TextFile)
             {
                 // TODO - Set up the Text Connector Properly
-                TextConnection text = new TextConnection();
-                Connections.Add(text);
+                TextConnector text = new TextConnector();
+                Connection = text;
             }
+        }
+
+        public static string CnnString(string name)
+        {
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
     }
 }

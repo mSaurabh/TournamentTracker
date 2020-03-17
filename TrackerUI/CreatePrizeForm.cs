@@ -7,7 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+// We moved the class files to their own folders.
 using TrackerLibrary;
+using TrackerLibrary.DataAccess;
+using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
@@ -32,10 +36,9 @@ namespace TrackerUI
                     prizeAmountValue.Text,
                     prizePercentageValue.Text);
 
-                foreach (IDataConnection db in GlobalConfig.Connections)
-                {
-                    db.CreatePrize(model);
-                }
+                GlobalConfig.Connection.CreatePrize(model);
+                
+                // Clearing the form once the create prize task was successful.
                 placeNameValue.Text = "";
                 placeNumberValue.Text = "";
                 prizeAmountValue.Text = "0";
@@ -43,10 +46,15 @@ namespace TrackerUI
             }
             else
             {
+                // Error for invalid entries.
                 MessageBox.Show("This form has invalid information. Please Check and try again.");
             }
         }
 
+        /// <summary>
+        /// Validates the form entries for Create Prize form.
+        /// </summary>
+        /// <returns>False if any of the form field value is invalid.</returns>
         private bool ValidateForm()
         {
             bool output = true;
