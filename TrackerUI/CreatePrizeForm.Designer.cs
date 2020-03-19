@@ -137,7 +137,6 @@
             this.orPlaceAmountPercentageLabel.Size = new System.Drawing.Size(66, 34);
             this.orPlaceAmountPercentageLabel.TabIndex = 20;
             this.orPlaceAmountPercentageLabel.Text = "- or -";
-            this.orPlaceAmountPercentageLabel.Click += new System.EventHandler(this.orPlaceAmountPercentageLabel_Click);
             // 
             // createPrizeButton
             // 

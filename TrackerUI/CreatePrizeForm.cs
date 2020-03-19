@@ -22,11 +22,6 @@ namespace TrackerUI
             InitializeComponent();
         }
 
-        private void orPlaceAmountPercentageLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void createPrizeButton_Click(object sender, EventArgs e)
         {
             if(ValidateForm())
@@ -59,6 +54,7 @@ namespace TrackerUI
         {
             bool output = true;
             int placeNumber = 0;
+
             bool placeNumberValid = int.TryParse(placeNumberValue.Text, out placeNumber);
 
             if (placeNumberValid == false)
