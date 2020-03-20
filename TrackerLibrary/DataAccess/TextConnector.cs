@@ -70,5 +70,11 @@ namespace TrackerLibrary.DataAccess
             return model;
             
         }
+
+        //TODO : Implement this method to obtain all the people from file
+        public List<PersonModel> GetPerson_All()
+        {
+            return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
+        }
     }
 }
