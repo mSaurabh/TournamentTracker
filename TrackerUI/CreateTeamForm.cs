@@ -92,6 +92,15 @@ namespace TrackerUI
             }
         }
 
+        private void ResetForm()
+        {
+            firstNameValue.Text = "";
+            lastNameValue.Text = "";
+            emailValue.Text = "";
+            cellphoneValue.Text = "";
+            teamNameValue.Text = "";
+        }
+
         private bool ValidateForm()
         {
 
@@ -148,6 +157,25 @@ namespace TrackerUI
             }
 
             WireUpLists();
+        }
+
+        private void createTeamButton_Click(object sender, EventArgs e)
+        {
+            if (teamNameValue.Text == "")
+            {
+                MessageBox.Show("You need to enter a team name.");
+            }
+            else
+            {
+                TeamModel t = new TeamModel();
+
+                t.TeamName = teamNameValue.Text;
+                t.TeamMembers = selectedTeamMembers;
+
+                t = GlobalConfig.Connection.CreateTeam(t);
+
+                //TODO - If we are not closing this form after creation, reset the form.
+            }
         }
     }
 }
