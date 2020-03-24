@@ -19,16 +19,16 @@ namespace TrackerUI
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Initialize the database connections
-            TrackerLibrary.GlobalConfig.InitializeConnections(DatabaseType.TextFile);
+            TrackerLibrary.GlobalConfig.InitializeConnections(DatabaseType.Sql);
 
             // Testing Create Prize Form
             //Application.Run(new CreatePrizeForm());
 
             // Testing Create Team Form
-            Application.Run(new CreateTeamForm());
+            //Application.Run(new CreateTeamForm());
 
             // Testing Create Tournament Form
-            //Application.Run(new CreateTournamentForm());
+            Application.Run(new CreateTournamentForm());
 
             // Testing Create  Form
             //Application.Run(new CreateTeamForm());
