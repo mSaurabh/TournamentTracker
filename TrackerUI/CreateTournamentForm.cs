@@ -104,5 +104,16 @@ namespace TrackerUI
 
             WireUpLists();
         }
+
+        private void createPrizeButton_Click(object sender, EventArgs e)
+        {
+            // Call the Create prize form.
+            CreatePrizeForm frm = new CreatePrizeForm();
+            frm.Show();
+
+            // get back from the form prize model.
+
+            // take that prize model and put it in the selected prizes
+        }
     }
 }
