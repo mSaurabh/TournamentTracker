@@ -15,11 +15,17 @@ using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
-    public partial class CreatePrizeForm : Form
+    public partial class CreatePrizeForm : Form 
     {
-        public CreatePrizeForm()
+        // Reference 
+        IPrizeRequester callingForm;
+        public CreatePrizeForm(IPrizeRequester caller)
         {
             InitializeComponent();
+
+            // caller is only within the constructor scope
+            // to make it visible at class level we assign it to the local instance of IPrizeRequester
+            callingForm = caller;
         }
 
         private void createPrizeButton_Click(object sender, EventArgs e)
@@ -32,12 +38,16 @@ namespace TrackerUI
                     prizePercentageValue.Text);
 
                 GlobalConfig.Connection.CreatePrize(model);
+                callingForm.PrizeComplete(model);
+
+                // Closing form instead of clearing all the fields
+                this.Close();
                 
-                // Clearing the form once the create prize task was successful.
-                placeNameValue.Text = "";
-                placeNumberValue.Text = "";
-                prizeAmountValue.Text = "0";
-                prizePercentageValue.Text = "0";
+                // Optional: Clearing the form once the create prize task was successful.
+                //placeNameValue.Text = "";
+                //placeNumberValue.Text = "";
+                //prizeAmountValue.Text = "0";
+                //prizePercentageValue.Text = "0";
             }
             else
             {

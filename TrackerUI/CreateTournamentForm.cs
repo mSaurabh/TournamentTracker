@@ -12,7 +12,7 @@ using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
-    public partial class CreateTournamentForm : Form
+    public partial class CreateTournamentForm : Form,IPrizeRequester,ITeamRequester
     {
         List<TeamModel> availableTeams = GlobalConfig.Connection.GetTeam_All();
         List<TeamModel> selectedTeams = new List<TeamModel>();
@@ -80,21 +80,15 @@ namespace TrackerUI
 
             tournamentTeamsListBox.DataSource = selectedTeams;
             tournamentTeamsListBox.DisplayMember = "TeamName";
+
+            prizeListBox.DataSource = null;
+            prizeListBox.DataSource = selectedPrizes;
+            prizeListBox.DisplayMember = "PlaceName";
         }
 
         private void removeSelectedPlayerButton_Click(object sender, EventArgs e)
         {
-            //PersonModel p = (PersonModel)teamMembersListBox.SelectedItem;
-
-            //if (p != null)
-            //{
-            //    selectedTeamMembers.Remove(p);
-            //    availableTeamMembers.Add(p);
-            //}
-
-            //WireUpLists();
-
-            TeamModel t = (TeamModel)tournamentTeamsListBox.SelectedItem;
+           TeamModel t = (TeamModel)tournamentTeamsListBox.SelectedItem;
 
             if (t != null)
             {
@@ -108,12 +102,48 @@ namespace TrackerUI
         private void createPrizeButton_Click(object sender, EventArgs e)
         {
             // Call the Create prize form.
-            CreatePrizeForm frm = new CreatePrizeForm();
+            // "this" keyword represents this specific form instance.
+            CreatePrizeForm frm = new CreatePrizeForm(this);
             frm.Show();
 
-            // get back from the form prize model.
-
-            // take that prize model and put it in the selected prizes
+            
+            
         }
+
+        public void PrizeComplete(PrizeModel model)
+        {
+            // Check Youtube Reference : https://www.youtube.com/watch?v=rS734DJL6zM&t=255s 
+            // Get back from the form prize model.
+            // Take that prize model and put it in the selected prizes
+            selectedPrizes.Add(model);
+            
+            //Refresh List once the prize is created.
+            WireUpLists();
+        }
+
+        private void removeSelectedPrizeButton_Click(object sender, EventArgs e)
+        {
+            PrizeModel p = (PrizeModel)prizeListBox.SelectedItem;
+            if (p != null)
+            {
+                selectedPrizes.Remove(p);
+            }
+
+            WireUpLists();
+            
+        }
+
+        private void createNewTeamLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CreateTeamForm frm = new CreateTeamForm(this);
+            frm.Show();
+        }
+        public void TeamComplete(TeamModel model)
+        {
+            selectedTeams.Add(model);
+            WireUpLists();
+        }
+
+     
     }
 }
