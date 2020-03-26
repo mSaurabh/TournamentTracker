@@ -13,8 +13,9 @@ namespace TrackerLibrary.DataAccess
         private const string PrizesFile = "PrizeModels.csv";
         private const string PeopleFile = "PersonModels.csv";
         private const string TeamFile = "TeamModels.csv";
+        private const string TournamentFile = "TournamentModels.csv";
 
-        public PersonModel CreatePerson(PersonModel model)
+        public void CreatePerson(PersonModel model)
         {
             // Load the file if one exists
             // Convert the data in file to Person Models .. so each line represents a person and the info is comma separated
@@ -38,8 +39,6 @@ namespace TrackerLibrary.DataAccess
             // Save the List<string> to the text file
             people.SaveToPeopleFile(PeopleFile);
 
-            return model;
-
         }
 
         /// <summary>
@@ -47,7 +46,7 @@ namespace TrackerLibrary.DataAccess
         /// </summary>
         /// <param name="model">The prize information.</param>
         /// <returns>The prize information, including the unique identifier.</returns>
-        public PrizeModel CreatePrize(PrizeModel model)
+        public void CreatePrize(PrizeModel model)
         {
             // Load the file if one exists
             // Convert the data in file to Person Model's List -> so each line represents a person and the info is comma separated
@@ -69,13 +68,11 @@ namespace TrackerLibrary.DataAccess
             // Save the List<string> to the text file
             prizes.SaveToPrizeFile(PrizesFile);
 
-            return model;
             
         }
 
-        public TeamModel CreateTeam(TeamModel model)
+        public void CreateTeam(TeamModel model)
         {
-            //TODO : Implement this method for TextConnector
             List<TeamModel> teams = TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
 
             // Find MAX Id based on the file read, if file is empty then assign id = 1
@@ -94,10 +91,30 @@ namespace TrackerLibrary.DataAccess
             // Save the List<string> to the text file
             teams.SaveToTeamFile(TeamFile);
 
-            return model;
         }
 
-        //TODO : Implement this method to obtain all the people from file
+        public void CreateTournament(TournamentModel model)
+        {
+            List<TournamentModel> tournaments = TournamentFile
+                                                .FullFilePath()
+                                                .LoadFile()
+                                                .ConvertToTournamentModels(TeamFile,PeopleFile,PrizesFile);
+            
+            // Find MAX Id based on the file read, if file is empty then assign id = 1
+            int currentId = 1;
+
+            if (tournaments.Count > 0)
+            {
+                currentId = tournaments.OrderByDescending(x => x.Id).First().Id + 1;
+            }
+
+            model.Id = currentId;
+
+            tournaments.Add(model);
+
+            tournaments.SaveToTournamentFile(TournamentFile);
+        }
+
         public List<PersonModel> GetPerson_All()
         {
             return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
