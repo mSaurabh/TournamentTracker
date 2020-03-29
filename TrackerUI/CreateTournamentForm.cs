@@ -150,6 +150,15 @@ namespace TrackerUI
             decimal fee = 0;
             bool feeAcceptable = decimal.TryParse(entryFeeValue.Text,out fee);
 
+            if (tournamentNameValue.Text == "")
+            {
+                MessageBox.Show("Enter a valid tournament name.",
+                     "Invalid Fee",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Error);
+                return;
+            }
+
             if (!feeAcceptable)
             {
                 MessageBox.Show("Enter a valid Entry Fee",
@@ -158,6 +167,32 @@ namespace TrackerUI
                                 MessageBoxIcon.Error);
                 return;
             }
+            if(fee <= 0)
+            {
+                MessageBox.Show("Fee must be greater than $0.",
+                     "Invalid Fee",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Error);
+                return;
+            }
+            if (tournamentTeamsListBox.Items.Count == 0)
+            {
+                MessageBox.Show("Please assign team(s) to the tournament.",
+                     "Invalid Fee",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Error);
+                return;
+            }
+            if (prizeListBox.Items.Count == 0)
+            {
+                MessageBox.Show("Please assign a prize to the tournament.",
+                     "Invalid Fee",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Error);
+                return;
+            }
+
+
             // Create our tournament model based on the entries in the form.
             TournamentModel tm = new TournamentModel();
 

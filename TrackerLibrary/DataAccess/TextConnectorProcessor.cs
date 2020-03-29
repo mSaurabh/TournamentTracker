@@ -305,5 +305,39 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             return output;
 
         }
+
+        public static void SaveRoundsToFile(this TournamentModel model , string matchupFile, string matchupEntryFile)
+        {
+            // Loop Through each round
+            // Loop through each matchup
+            // Save the matchup 
+            // get the id for the new matchup and save the record
+            // Loop through each, entry get the id and save it.
+            foreach (List<MatchupModel> round in model.Rounds)
+            {
+                foreach (MatchupModel matchup in round)
+                {
+                    // Load all of the matchups from file
+                    // Get the top id and add one
+                    // Store the id
+                    // Save the matchup record
+                    matchup.SaveMatchupToFile(matchupFile, matchupEntryFile);
+                  
+                }
+            }
+        }
+
+        public static void SaveMatchupToFile(this MatchupModel matchup, string matchupFile,string matchupEntryFile)
+        {
+            foreach (MatchupEntryModel entry in matchup.Entries)
+            {
+                entry.SaveEntryToFile(matchupEntryFile);
+            }
+        }
+
+        public static void SaveEntryToFile(this MatchupEntryModel entry,string matchupEntryFile)
+        {
+
+        }
     }
 }
