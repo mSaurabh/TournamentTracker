@@ -183,14 +183,14 @@ namespace TrackerUI
                      MessageBoxIcon.Error);
                 return;
             }
-            if (prizeListBox.Items.Count == 0)
-            {
-                MessageBox.Show("Please assign a prize to the tournament.",
-                     "Invalid Fee",
-                     MessageBoxButtons.OK,
-                     MessageBoxIcon.Error);
-                return;
-            }
+            //if (prizeListBox.Items.Count == 0)
+            //{
+            //    MessageBox.Show("Please assign a prize to the tournament.",
+            //         "Invalid Fee",
+            //         MessageBoxButtons.OK,
+            //         MessageBoxIcon.Error);
+            //    return;
+            //}
 
 
             // Create our tournament model based on the entries in the form.
