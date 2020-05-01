@@ -55,7 +55,6 @@
             this.headerLabel.Size = new System.Drawing.Size(217, 43);
             this.headerLabel.TabIndex = 0;
             this.headerLabel.Text = "Tournament:";
-            this.headerLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // tournamentName
             // 
@@ -67,7 +66,6 @@
             this.tournamentName.Size = new System.Drawing.Size(141, 43);
             this.tournamentName.TabIndex = 1;
             this.tournamentName.Text = "<none>";
-            this.tournamentName.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // roundLabel
             // 
@@ -168,7 +166,6 @@
             this.teamTwoName.Size = new System.Drawing.Size(152, 34);
             this.teamTwoName.TabIndex = 9;
             this.teamTwoName.Text = "<team two>";
-            this.teamTwoName.Click += new System.EventHandler(this.teamTwo_Click);
             // 
             // versusLabel
             // 
@@ -218,10 +215,9 @@
             this.Controls.Add(this.headerLabel);
             this.Font = new System.Drawing.Font("Franklin Gothic Book", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "TournamentViewerForm";
             this.Text = "Tournament Viewer";
-            this.Load += new System.EventHandler(this.TournamentViewerForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

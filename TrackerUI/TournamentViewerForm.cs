@@ -7,34 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
     public partial class TournamentViewerForm : Form
     {
-        public TournamentViewerForm()
+        private TournamentModel tournament;
+
+        public TournamentViewerForm(TournamentModel tournamentModel)
         {
             InitializeComponent();
+
+            tournament = tournamentModel;
+
+            LoadFormData();
         }
 
-        private void TournamentViewerForm_Load(object sender, EventArgs e)
+        private void LoadFormData()
         {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void teamTwo_Click(object sender, EventArgs e)
-        {
-
+            tournamentName.Text = tournament.TournamentName;
         }
     }
 }

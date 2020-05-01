@@ -32,14 +32,14 @@ namespace TrackerUI
             WireUpLists();
         }
 
-        private void CreateSampleData()
+        /*private void CreateSampleData()
         {
             availableTeamMembers.Add(new PersonModel { FirstName = "Saurabh", LastName = "Mankar" });
             availableTeamMembers.Add(new PersonModel { FirstName = "EPJ", LastName = "Morgan" });
 
             selectedTeamMembers.Add(new PersonModel { FirstName = "Soham", LastName = "Nagawanshi" });
             selectedTeamMembers.Add(new PersonModel { FirstName = "Abhishek", LastName = "Kokate" });
-        }
+        }*/
 
         private void WireUpLists()
         {
