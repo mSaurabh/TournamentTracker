@@ -143,8 +143,6 @@ namespace TrackerLibrary.DataAccess
 
                         p.Add("@MatchupId",matchup.Id );
 
-                        p.Add("@ParentMatchupId",entry.ParentMatchup.Id);
-
                         if (entry.ParentMatchup == null)
                         {
                             p.Add("@ParentMatchupId", null);
