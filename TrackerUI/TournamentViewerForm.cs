@@ -34,7 +34,15 @@ namespace TrackerUI
 
         private void LoadFormData()
         {
-            tournamentName.Text = tournament.TournamentName;
+            if (tournament != null) 
+            {
+                tournamentName.Text = tournament.TournamentName;
+            }
+            else
+            {
+                MessageBox.Show("Nothing to load. Create a new Tournament.");
+            }
+
         }
 
         private void WireUpLists()
@@ -224,6 +232,24 @@ namespace TrackerUI
             else
             {
                 MessageBox.Show("I do not handle tie games.");
+            }
+
+            foreach (List<MatchupModel> round in tournament.Rounds)
+            {
+                foreach (MatchupModel rm in round)
+                {
+                    foreach (MatchupEntryModel me in rm.Entries)
+                    {
+                        if (me.ParentMatchup != null)
+                        {
+                            if (me.ParentMatchup.Id == m.Id)
+                            {
+                                me.TeamCompeting = m.Winner;
+                                GlobalConfig.Connection.UpdateMatchup(rm);
+                            } 
+                        }
+                    }
+                }
             }
 
             LoadMatchups((int)roundDropDown.SelectedItem);
