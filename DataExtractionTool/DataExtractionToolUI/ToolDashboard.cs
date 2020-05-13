@@ -51,5 +51,10 @@ namespace DataExtractionToolUI
                 MessageBox.Show("Invalid File Path Entered. Try again.");
             }
         }
+
+        private void RemoveSelectedFilesButton_Click(object sender, EventArgs e)
+        {
+            FilesSelectedListBox.Items.Remove(FilesSelectedListBox.SelectedItem);
+        }
     }
 }

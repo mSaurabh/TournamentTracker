@@ -104,6 +104,7 @@
             this.RemoveSelectedFilesButton.TabIndex = 6;
             this.RemoveSelectedFilesButton.Text = "Remove Selected";
             this.RemoveSelectedFilesButton.UseVisualStyleBackColor = true;
+            this.RemoveSelectedFilesButton.Click += new System.EventHandler(this.RemoveSelectedFilesButton_Click);
             // 
             // ExtractButton
             // 
