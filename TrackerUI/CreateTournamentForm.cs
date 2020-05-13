@@ -208,6 +208,9 @@ namespace TrackerUI
             // Create all of the Prize entreis
             // Create all of the team entries
             GlobalConfig.Connection.CreateTournament(tm);
+
+            MessageBox.Show("Tournament Created. Closing window.");
+            this.Close();
         }
     }
 }

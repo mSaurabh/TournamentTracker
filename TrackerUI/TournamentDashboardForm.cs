@@ -20,9 +20,16 @@ namespace TrackerUI
         {
             InitializeComponent();
 
+            LoadTournaments();
+
             WireUpLists();
         }
 
+        private void LoadTournaments()
+        {
+            tournaments = GlobalConfig.Connection.GetTournament_All();
+            WireUpLists();
+        }
         private void WireUpLists()
         {
             loadExistingTournamentDropDown.DataSource = tournaments;
@@ -40,6 +47,12 @@ namespace TrackerUI
             TournamentModel tm = (TournamentModel)loadExistingTournamentDropDown.SelectedItem;
             TournamentViewerForm frm = new TournamentViewerForm(tm);
             frm.Show();
+
+        }
+
+        private void refreshListButton_Click(object sender, EventArgs e)
+        {
+            LoadTournaments();
         }
     }
 }

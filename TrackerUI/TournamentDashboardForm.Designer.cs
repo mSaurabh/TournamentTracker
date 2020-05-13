@@ -34,6 +34,7 @@
             this.loadExistingTournamentLabel = new System.Windows.Forms.Label();
             this.loadTournamentButton = new System.Windows.Forms.Button();
             this.createTournamentButton = new System.Windows.Forms.Button();
+            this.refreshListButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // headerLabel
@@ -90,7 +91,7 @@
             this.createTournamentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.createTournamentButton.Font = new System.Drawing.Font("Franklin Gothic Book", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createTournamentButton.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.createTournamentButton.Location = new System.Drawing.Point(123, 261);
+            this.createTournamentButton.Location = new System.Drawing.Point(125, 335);
             this.createTournamentButton.Name = "createTournamentButton";
             this.createTournamentButton.Size = new System.Drawing.Size(245, 66);
             this.createTournamentButton.TabIndex = 23;
@@ -98,12 +99,29 @@
             this.createTournamentButton.UseVisualStyleBackColor = true;
             this.createTournamentButton.Click += new System.EventHandler(this.createTournamentButton_Click);
             // 
+            // refreshListButton
+            // 
+            this.refreshListButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.refreshListButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.refreshListButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.refreshListButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.refreshListButton.Font = new System.Drawing.Font("Franklin Gothic Book", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.refreshListButton.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.refreshListButton.Location = new System.Drawing.Point(139, 257);
+            this.refreshListButton.Name = "refreshListButton";
+            this.refreshListButton.Size = new System.Drawing.Size(214, 41);
+            this.refreshListButton.TabIndex = 24;
+            this.refreshListButton.Text = "Refresh List";
+            this.refreshListButton.UseVisualStyleBackColor = true;
+            this.refreshListButton.Click += new System.EventHandler(this.refreshListButton_Click);
+            // 
             // TournamentDashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(493, 387);
+            this.ClientSize = new System.Drawing.Size(493, 456);
+            this.Controls.Add(this.refreshListButton);
             this.Controls.Add(this.createTournamentButton);
             this.Controls.Add(this.loadTournamentButton);
             this.Controls.Add(this.loadExistingTournamentDropDown);
@@ -127,5 +145,6 @@
         private System.Windows.Forms.Label loadExistingTournamentLabel;
         private System.Windows.Forms.Button loadTournamentButton;
         private System.Windows.Forms.Button createTournamentButton;
+        private System.Windows.Forms.Button refreshListButton;
     }
 }
