@@ -47,6 +47,11 @@ namespace TrackerLibrary
             }
         }
 
+        public static string AppKeyLookUp(string key)
+        {
+            return ConfigurationManager.AppSettings[key];
+        }
+
         public static string CnnString(string name)
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
