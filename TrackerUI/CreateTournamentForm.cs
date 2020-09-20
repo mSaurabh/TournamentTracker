@@ -209,6 +209,9 @@ namespace TrackerUI
             // Create all of the team entries
             GlobalConfig.Connection.CreateTournament(tm);
 
+            // Email Users from the first round 
+            tm.AlertUsersToNewRound();
+
             TournamentLogic.UpdateTournamentResults(tm);
 
             MessageBox.Show("Tournament Created. Closing window.");

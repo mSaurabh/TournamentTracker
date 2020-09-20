@@ -55,5 +55,10 @@ namespace TrackerLibrary.Models
             this.PrizePercentage = prizePercentageValue;
 
         }
+
+        internal decimal CalculatePrizePayout(decimal totalIncome)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
