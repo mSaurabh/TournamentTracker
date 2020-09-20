@@ -143,6 +143,11 @@ namespace TrackerLibrary.DataAccess
             return GlobalConfig.TournamentFile.FullFilePath().LoadFile().ConvertToTournamentModels();
         }
 
+        public void InsertSMSLogMessage(decimal MessageCost, string MessageCurrency, string MessageStatus, int MessageLength, string MessageToPhoneNumber, string MessageFromPhoneNumber)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateMatchup(MatchupModel model)
         {
             model.UpdateMatchupToFile();

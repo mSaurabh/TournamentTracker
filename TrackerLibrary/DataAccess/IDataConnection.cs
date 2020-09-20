@@ -16,6 +16,8 @@ namespace TrackerLibrary.DataAccess
         void UpdateMatchup(MatchupModel model);
         void CompleteTournament(TournamentModel model);
 
+        void InsertSMSLogMessage(decimal MessageCost, string MessageCurrency, string MessageStatus, int MessageLength, string MessageToPhoneNumber, string MessageFromPhoneNumber);
+
         List<TeamModel> GetTeam_All();
         List<PersonModel> GetPerson_All();
         List<TournamentModel> GetTournament_All();

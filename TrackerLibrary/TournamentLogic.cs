@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using TrackerLibrary.Models;
 
 namespace TrackerLibrary
@@ -82,44 +81,48 @@ namespace TrackerLibrary
 
         private static void AlertPersonToNewRound(PersonModel p, string teamName, MatchupEntryModel competitor)
         {
-            if(p.EmailAddress.Length == 0)
+            if(p.EmailAddress.Length > 0 && GlobalConfig.AppKeyLookUp("communicationPreference") == "Email")
             {
-                if (!IsValidEmail(p.EmailAddress))
+                if (IsValidEmail(p.EmailAddress))
                 {
-                    
-                    return;
+                    string to = "";
+                    string subject = "";
+                    StringBuilder body = new StringBuilder();
+
+                    if (competitor != null)
+                    {
+                        subject = $"You have a new matchup with {competitor.TeamCompeting.TeamName}";
+
+                        body.AppendLine("<h1>You have a new matchup</h1>");
+                        body.Append("<strong>Competitor: </strong>"); // Similar to appending a new line = sb.AppendLine
+                        body.Append(competitor.TeamCompeting.TeamName);
+                        body.AppendLine();
+                        body.AppendLine();
+                        body.AppendLine("Have a great time!");
+                        body.AppendLine("~Tournament Tracker");
+
+                    }
+                    else
+                    {
+                        subject = $"You have a bye week this round";
+
+                        body.AppendLine("Enjoy your round off!");
+                        body.AppendLine("~Tournament Tracker");
+
+                    }
+                    to = p.EmailAddress;
+
+                    EmailLogic.SendEmail(to, subject, body.ToString());
                 }
 
             }
 
-            string to = "";
-            string subject = "";
-            StringBuilder body = new StringBuilder();
-
-            if(competitor != null)
+            if(p.CellphoneNumber.Length > 0 && GlobalConfig.AppKeyLookUp("communicationPreference") == "SMS")
             {
-                subject = $"You have a new matchup with {competitor.TeamCompeting.TeamName}";
-
-                body.AppendLine("<h1>You have a new matchup</h1>");
-                body.Append("<strong>Competitor: </strong>"); // Similar to appending a new line = sb.AppendLine
-                body.Append(competitor.TeamCompeting.TeamName);
-                body.AppendLine();
-                body.AppendLine();
-                body.AppendLine("Have a great time!");
-                body.AppendLine("~Tournament Tracker");
-
+                SMSLogic.SendSMSMessage(p.CellphoneNumber, $"You have a new matchup with {competitor.TeamCompeting.TeamName}");
             }
-            else
-            {
-                subject = $"You have a bye week this round";
 
-                body.AppendLine("Enjoy your round off!");
-                body.AppendLine("~Tournament Tracker");
-
-            }
-            to = p.EmailAddress;
-
-            EmailLogic.SendEmail(to, subject, body.ToString());
+            
         }
 
         private static bool IsValidEmail(string email)

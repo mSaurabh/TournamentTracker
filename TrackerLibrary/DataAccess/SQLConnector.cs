@@ -393,13 +393,32 @@ namespace TrackerLibrary.DataAccess
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(dbName)))
             {
                 var p = new DynamicParameters();
-                p.Add("@Id", model.Id);
+                p.Add("@TournamentId", model.Id);
 
 
                 connection.Execute("dbo.spTournaments_Complete", p, commandType: CommandType.StoredProcedure);
 
             }
 
+        }
+
+        public void InsertSMSLogMessage(decimal MessageCost, string MessageCurrency, string MessageStatus, int MessageLength, string MessageToPhoneNumber, string MessageFromPhoneNumber)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(dbName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MessageCost", MessageCost);
+                p.Add("@MessageCurrency", MessageCurrency);
+                p.Add("@MessageStatus", MessageStatus);
+                p.Add("@MessageLength", MessageLength);
+                p.Add("@MessageToPhoneNumber", MessageToPhoneNumber);
+                p.Add("@MessageFromPhoneNumber", MessageFromPhoneNumber);
+                
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                connection.Execute("dbo.spSMSLogMessage_Insert", p, commandType: CommandType.StoredProcedure);
+
+            }
         }
     }
 }
