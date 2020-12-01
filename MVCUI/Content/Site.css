@@ -22,3 +22,20 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* .(dot) indicates a class.
+    This change is made to a bundle (check out intro to ASP.net by Tim Corey on Youtube)
+    and hence we will have to close the browser and restart the project to see the changes.
+*/
+.tourney-display{
+    margin-left: 20px;
+}
+
+.tourney-display > li {
+    margin-bottom: 10px;
+}
+
+.tourney-display > li > a{
+    font-size:20px;
+}
+
