@@ -23,7 +23,7 @@ namespace TrackerLibrary.DataAccess
         /// <returns>The Person information, including the unique identifier.</returns>
         public void CreatePerson(PersonModel model)
         {
-            using(IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(dbName)))
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(dbName)))
             {
                 var p = new DynamicParameters();
                 p.Add("@FirstName", model.FirstName);
@@ -56,9 +56,9 @@ namespace TrackerLibrary.DataAccess
                 p.Add("@PlaceName", model.PlaceName);
                 p.Add("@PrizeAmount", model.PrizeAmount);
                 p.Add("@PrizePercentage", model.PrizePercentage);
-                p.Add("@id", 0,dbType:DbType.Int32,direction:ParameterDirection.Output);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                connection.Execute("dbo.spPrizes_Insert",p,commandType:CommandType.StoredProcedure);
+                connection.Execute("dbo.spPrizes_Insert", p, commandType: CommandType.StoredProcedure);
 
                 model.Id = p.Get<int>("@id");
             }
@@ -143,7 +143,7 @@ namespace TrackerLibrary.DataAccess
 
                         p = new DynamicParameters();
 
-                        p.Add("@MatchupId",matchup.Id );
+                        p.Add("@MatchupId", matchup.Id);
 
                         if (entry.ParentMatchup == null)
                         {
@@ -160,7 +160,7 @@ namespace TrackerLibrary.DataAccess
                         else
                         {
                             p.Add("@TeamCompetingId", entry.TeamCompeting.Id);
-                        }                        
+                        }
                         p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
                         connection.Execute("dbo.spMatchupEntries_Insert", p, commandType: CommandType.StoredProcedure);
@@ -194,7 +194,7 @@ namespace TrackerLibrary.DataAccess
         /// </summary>
         /// <param name="connection">SQL connection to perform database save.</param>
         /// <param name="model">Tournament Model</param>
-        private void SaveTournamentPrizes(IDbConnection connection,TournamentModel model)
+        private void SaveTournamentPrizes(IDbConnection connection, TournamentModel model)
         {
             foreach (PrizeModel pz in model.Prizes)
             {
@@ -261,7 +261,7 @@ namespace TrackerLibrary.DataAccess
 
                     // To Pass the parameter right after the stored proc name pass the param
                     // connection.Query<CastModel>("<Stored Proc Name>",<param variable>).ToList();
-                    team.TeamMembers = connection.Query<PersonModel>("dbo.spTeamMembers_GetByTeam",p,commandType: CommandType.StoredProcedure).ToList();
+                    team.TeamMembers = connection.Query<PersonModel>("dbo.spTeamMembers_GetByTeam", p, commandType: CommandType.StoredProcedure).ToList();
                 }
 
             }
@@ -314,25 +314,25 @@ namespace TrackerLibrary.DataAccess
 
                         // To Pass the parameter right after the stored proc name pass the param
                         // connection.Query<CastModel>("<Stored Proc Name>",<param variable>).ToList();
-                        
+
                         // Populate Rounds
                         m.Entries = connection.Query<MatchupEntryModel>("dbo.spMatchupEntries_GetByMatchup", p, commandType: CommandType.StoredProcedure).ToList();
 
                         List<TeamModel> allTeams = GetTeam_All();
 
-                        if(m.WinnerId > 0)
+                        if (m.WinnerId > 0)
                         {
                             m.Winner = allTeams.Where(x => x.Id == m.WinnerId).First();
                         }
 
                         foreach (var me in m.Entries)
                         {
-                            if(me.TeamCompetingId > 0)
+                            if (me.TeamCompetingId > 0)
                             {
                                 me.TeamCompeting = allTeams.Where(x => x.Id == me.TeamCompetingId).First();
                             }
 
-                            if(me.ParentMatchupId > 0)
+                            if (me.ParentMatchupId > 0)
                             {
                                 me.ParentMatchup = matchups.Where(x => x.Id == me.ParentMatchupId).First();
                             }
@@ -344,13 +344,13 @@ namespace TrackerLibrary.DataAccess
 
                     foreach (MatchupModel m in matchups)
                     {
-                        if(m.MatchupRound > currRound)
+                        if (m.MatchupRound > currRound)
                         {
                             t.Rounds.Add(currRow);
                             currRow = new List<MatchupModel>();
                             currRound += 1;
                         }
-                        currRow.Add(m); 
+                        currRow.Add(m);
                     }
 
                     t.Rounds.Add(currRow);
@@ -383,7 +383,7 @@ namespace TrackerLibrary.DataAccess
                         p.Add("@TeamCompetingId", me.TeamCompetingId);
                         p.Add("@Score", me.Score);
                         connection.Execute("dbo.spMatchupEntries_Update", p, commandType: CommandType.StoredProcedure);
-                    }                    
+                    }
                 }
             }
         }
@@ -413,12 +413,23 @@ namespace TrackerLibrary.DataAccess
                 p.Add("@MessageLength", MessageLength);
                 p.Add("@MessageToPhoneNumber", MessageToPhoneNumber);
                 p.Add("@MessageFromPhoneNumber", MessageFromPhoneNumber);
-                
+
                 p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
                 connection.Execute("dbo.spSMSLogMessage_Insert", p, commandType: CommandType.StoredProcedure);
 
             }
+        }
+
+        public List<PrizeModel> GetPrizes_All()
+        {
+            List<PrizeModel> output;
+
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(dbName)))
+            {
+                output = connection.Query<PrizeModel>("dbo.spPrizes_GetAll").ToList();
+            }
+            return output;
         }
     }
 }
